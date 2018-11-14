@@ -1253,7 +1253,12 @@ class TracRPC
         }
 
         $this->response[$id] = $response->result;
-        $this->error[$id] = false;
+
+        if(is_array($this->error)) {
+            $this->error[$id] = false;
+        } else {
+            $this->error = false;
+        }
 
         if (($response->error !== null) and is_object($response->error) === true) {
             foreach ($response->error as $key => $value) {
